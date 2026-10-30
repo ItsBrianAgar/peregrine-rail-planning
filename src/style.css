@@ -1,0 +1,231 @@
+/* Tokens. Change these to restyle the whole site. */
+:root {
+  --surface: #fcfcfb;
+  --page: #f9f9f7;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --ink-muted: #898781;
+  --hairline: #e1e0d9;
+  --border: rgba(11, 11, 11, 0.1);
+  --accent: #2a78d6;
+  --flag-bg: #fdf3e7;
+  --flag-ink: #7a3e00;
+  --panel-width: 360px;
+  --radius: 6px;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  background: var(--page);
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+
+.app {
+  display: grid;
+  grid-template-columns: var(--panel-width) 1fr;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* ---------- Panel ---------- */
+.panel {
+  overflow-y: auto;
+  background: var(--surface);
+  border-right: 1px solid var(--hairline);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.panel-head { padding: 20px 20px 12px; }
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+h1 { margin: 0; font-size: 22px; line-height: 1.2; }
+.lede { margin: 6px 0 0; color: var(--ink-2); }
+
+.panel-section { padding: 12px 20px 16px; border-top: 1px solid var(--hairline); }
+h2 { margin: 0 0 10px; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-2); }
+h3 { margin: 12px 0 6px; font-size: 13px; }
+.section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.section-head h2 { margin: 0; }
+.count {
+  display: inline-block;
+  min-width: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--page);
+  border: 1px solid var(--hairline);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--ink-2);
+}
+.hint { margin: 4px 0 8px; color: var(--ink-muted); font-size: 13px; }
+
+.toggles, .legend, .site-list, .unplaced-list { list-style: none; margin: 0; padding: 0; }
+.toggles li + li { margin-top: 8px; }
+.toggles label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
+.toggles input { margin: 2px 0 0; accent-color: var(--accent); width: 16px; height: 16px; }
+.toggle-text { display: flex; flex-direction: column; }
+.toggle-text small { color: var(--ink-muted); font-size: 12px; }
+
+.legend li { display: flex; align-items: center; gap: 10px; padding: 3px 0; }
+.swatch {
+  flex: none;
+  display: inline-block;
+  width: 22px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--c, var(--ink-2));
+}
+.swatch--dashed {
+  background: repeating-linear-gradient(90deg, var(--c, var(--ink-2)) 0 6px, transparent 6px 10px);
+}
+.swatch--dot {
+  width: 12px;
+  height: 12px;
+  margin: 0 5px;
+  border-radius: 50%;
+  border: 2px solid var(--ink-2);
+  background: transparent;
+}
+
+.swatch--band { height: 10px; border-radius: 2px; opacity: 0.6; }
+.swatch--band-dashed {
+  background: repeating-linear-gradient(90deg, var(--c) 0 6px, transparent 6px 9px);
+  opacity: 0.5;
+}
+
+.filters { display: flex; gap: 6px; }
+.filter select {
+  font: inherit;
+  font-size: 13px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.site-list li + li { border-top: 1px solid var(--hairline); }
+.site {
+  display: grid;
+  grid-template-columns: 22px 44px 40px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 4px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.site:hover, .site:focus-visible { background: var(--page); outline: none; }
+.site:focus-visible { box-shadow: 0 0 0 2px var(--accent); }
+.site-id { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.site-elr { font-weight: 600; }
+.site-place { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.site-speed { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
+.unplaced summary { cursor: pointer; list-style: none; }
+.unplaced summary::-webkit-details-marker { display: none; }
+.unplaced summary h2 { display: inline-flex; align-items: center; gap: 8px; margin: 0; }
+.unplaced summary h2::before { content: '▸'; font-size: 11px; }
+.unplaced[open] summary h2::before { content: '▾'; }
+.unplaced-list li {
+  display: grid;
+  grid-template-columns: 44px 40px 1fr;
+  gap: 2px 8px;
+  padding: 7px 4px;
+  border-top: 1px solid var(--hairline);
+  font-size: 13px;
+}
+.unplaced-reason { grid-column: 1 / -1; color: var(--ink-muted); font-size: 12px; }
+
+.panel-foot { padding: 16px 20px 24px; border-top: 1px solid var(--hairline); color: var(--ink-muted); font-size: 12px; }
+.panel-foot p { margin: 0 0 6px; }
+.error { padding: 20px; color: #b42318; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Map ---------- */
+.map { height: 100%; background: #e9e8e3; }
+
+/* Mute the base map so the data reads first. */
+.basemap { filter: grayscale(1) contrast(0.9) brightness(1.04); }
+
+.rank-badge {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #eb6834;
+  border: 2px solid #fff;
+  color: #fff;
+  font: 700 11px/1 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.rank-badge--inline { display: inline-grid; width: 20px; height: 20px; font-size: 10px; margin-left: 4px; }
+
+/* Tamping week labels: hidden until zoomed in (main.ts adds .week-labels-on). */
+.week-badge {
+  display: none;
+  place-items: center;
+  border-radius: 9px;
+  background: #0f6e4c;
+  color: #fff;
+  font: 700 10px/1 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 0 1.5px #fff;
+}
+.week-labels-on .week-badge { display: grid; }
+.week-badge--inline { display: inline-grid; width: 32px; height: 16px; margin-left: 4px; }
+
+/* Station labels: hidden until zoomed in (main.ts adds .labels-on). */
+.leaflet-tooltip.station-label {
+  display: none;
+  padding: 0 4px;
+  border: 0;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: none;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+}
+.leaflet-tooltip.station-label::before { display: none; }
+.labels-on .leaflet-tooltip.station-label { display: block; }
+
+.leaflet-tooltip.elr-tip { font-size: 12px; }
+
+.popup { font-size: 13px; line-height: 1.4; }
+.popup-kicker { margin: 0 0 2px !important; font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.popup h3 { margin: 0 0 8px; font-size: 15px; }
+.popup table { border-collapse: collapse; width: 100%; }
+.popup th { padding: 2px 10px 2px 0; text-align: left; font-weight: 500; color: var(--ink-muted); white-space: nowrap; vertical-align: top; }
+.popup td { padding: 2px 0; }
+.popup-notes { margin: 8px 0 0 !important; max-height: 8.5em; overflow-y: auto; color: var(--ink-2); }
+.popup-flag { margin: 8px 0 0 !important; padding: 6px 8px; border-radius: 4px; background: var(--flag-bg); color: var(--flag-ink); font-size: 12px; }
+.popup-source { margin: 8px 0 0 !important; color: var(--ink-muted); font-size: 11px; }
+.popup-subhead { margin: 10px 0 2px !important; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-2); }
+.popup-list { margin: 0; padding-left: 16px; }
+.popup-list li { margin: 2px 0; }
+
+/* ---------- Small screens: map on top, panel below ---------- */
+@media (max-width: 720px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: 60vh auto; height: auto; }
+  .map { grid-row: 1; height: 60vh; position: sticky; top: 0; z-index: 1; }
+  .panel { grid-row: 2; border-right: 0; border-top: 1px solid var(--hairline); overflow: visible; }
+  .site { grid-template-columns: 22px 44px 40px 1fr auto; }
+}
